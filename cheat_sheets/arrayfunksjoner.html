@@ -11,6 +11,9 @@
     <h2>To måter å skrive ut en Array på:</h2>
     <p>.toString(): <span id="toString"></span></p>
     <p>.join(): <span id="join"></span></p>
+
+    <h2>Array etter slettemetode er kjørt</h2>
+    <p id="deleted"></p>
     <script>
         const books = [
             "Silver Eyes",
@@ -19,11 +22,23 @@
             "Bibelen",
             "Nålen",
             "Jævla drittsystem",
-            "Don't make me think"
-            "Twisted ones",
+            "Don't make me think",
+            "Twistedones",
             "Hunger games",
             "Surrounded by idiots"
         ]
+
+        //LEGGE TIL ELEMENTER I ARRAYEN
+        //.push(element):legger inn element på slutten av arrayen
+        books.push("Lord of the rings: Fellowships of the ring")
+        //.unshift(element): Legger inn element i starten av arrayen, og forskyver indexer!
+        books.unshift("LOTR: Two towers")
+        //.splice(startindex, number of elements modified, element(s))
+        //startindex: hvilken index vi starter å manipulere arrayen på
+        //number of elements modified: Hvis vi skal slette elementer, hvor mange fra og med
+        //startindex (eksempel: HVis startindex er 2, og antall elementer er 2 slettes index 2 og 3).
+        //Når vi legger til elementer, skal number of elements modified alltid være 0
+        books.splice(5, 0, "LOTR: Return og the king")
 
         document.getElementById("arrayCount").innerHTML = books.length
 
@@ -31,6 +46,32 @@
         document.getElementById("toString").innerHTML = books.toString()
         //.join(param): join skriver ut alle elementene u eb array, separert av param
         document.getElementById("join").innerHTML = books.join(", ")
+
+        //FJERNE ELEMENTER I ARRAYEN:
+        //.pop(): Dette sletter det siste elementet i arrayen
+        books.pop()
+
+        //.shift(): Sletter det første elementet i arrayen
+        books.shift()
+        
+        //.splice(startindex, number of elements to delete)
+        //books.splice(4, 1)
+
+        //.indexOf(element): Finner det første elementet i arrayen som matcher parameteren element, og returnerer indexen.
+        const indexFound = books.indexOf("LOTR: Return og the king")
+        console.log("index til LOTR-bok ", indexFound)
+        //Bruke indexOf-verdien i variabelen indexFound til å slette riktig bok:
+        books.splice(indexFound, 1)
+        //Hvis elementet vi forsøker å finne indexen til ikke finnes, returnerer indexOf -1
+
+        //Hvordan sjekke om en verdi finnes i en array:
+        const bookExists = books.includes("Fourth Wing")
+        console.log("Finnes Fourth Wing?", bookExists)
+        
+
+        document.getElementById("deleted").innerHTML = books.join(", ")
+
+
     </script>
 </body>
 </html>
